@@ -1,0 +1,60 @@
+---
+
+- name: Check alp
+  stat:
+    path: "/usr/local/bin/alp"
+  register: alp_result
+
+- name: Unarchive alp
+  unarchive:
+    src: https://github.com/tkuchiki/alp/releases/download/v1.0.10/alp_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+  when: not alp_result.stat.exists
+
+- name: Check pprotein
+  stat:
+    path: "/usr/local/bin/pprotein"
+  register: pprotein_result
+
+- name: Unarchive pprotein
+  unarchive:
+    src: https://github.com/kaz/pprotein/releases/download/v1.1.0/pprotein_1.1.0_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+  when: not pprotein_result.stat.exists
+
+# - name: pprotein | Create environment file
+#   template: src=pprotein.env.j2 dest=/etc/sysconfig/pprotein
+
+- name: Create pprotein working dir
+  file:
+    path: "/home/isucon/pprotein"
+    state: directory
+    owner: "isucon"
+    group: "isucon"
+    mode: "775"
+
+- name: pprotein | Create Unit file
+  template: src=pprotein.service.j2 dest=/lib/systemd/system/pprotein.service mode=644
+  notify:
+    - reload systemctl
+
+# - name: pprotein-agent | Create environment file
+#   template: src=pprotein-agent.env.j2 dest=/etc/sysconfig/pprotein-agent
+
+- name: Create pprotein-agent working dir
+  file:
+    path: "/home/isucon/pprotein-agent"
+    state: directory
+    owner: "isucon"
+    group: "isucon"
+    mode: "775"
+
+- name: pprotein-agent | Create Unit file
+  template: src=pprotein-agent.service.j2 dest=/lib/systemd/system/pprotein-agent.service mode=644
+  notify:
+    - reload systemctl
+
+# - name: pprotein | Start pprotein
+#   service: name=pprotein.service state=started enabled=yes

@@ -1,0 +1,15 @@
+[Unit]
+Description=pprotein
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pprotein
+PIDFile=/run/pprotein.pid
+WorkingDirectory=/home/isucon/pprotein
+User=isucon
+Group=isucon
+
+[Install]
+WantedBy=multi-user.target

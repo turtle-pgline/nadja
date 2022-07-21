@@ -1,0 +1,10 @@
+USERNAME=isucon
+GROUPNAME=isucon
+PASSWORD=isucon
+IUID=1001
+IGID=1001
+
+groupadd -g $IGID $GROUPNAME && \
+    useradd -m -s /bin/bash -u $IUID -g $IGID -G sudo $USERNAME && \
+    echo $USERNAME:$PASSWORD | chpasswd && \
+    echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

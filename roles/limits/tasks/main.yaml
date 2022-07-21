@@ -1,0 +1,14 @@
+---
+- name: Add or modify nofile soft limit for isucon
+  pam_limits:
+    domain: isucon
+    limit_type: soft
+    limit_item: nofile
+    value: 65535
+
+- name: Add or modify nofile hard limit for isucon
+  pam_limits:
+    domain: isucon
+    limit_type: hard
+    limit_item: nofile
+    value: 65535

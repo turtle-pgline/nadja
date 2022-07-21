@@ -1,0 +1,9 @@
+[all:vars]
+ansible_connection=ssh
+ansible_user=isucon
+[bench]
+[competitor]
+[allinone]
+# 192.168.33.10
+# nadja-test ansible_connection=docker
+18.176.93.128

@@ -1,0 +1,15 @@
+[Unit]
+Description=pprotein-agent
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/pprotein-agent
+PIDFile=/run/pprotein-agent.pid
+WorkingDirectory=/home/isucon/pprotein-agent
+User=isucon
+Group=isucon
+
+[Install]
+WantedBy=multi-user.target

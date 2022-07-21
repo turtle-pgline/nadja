@@ -1,0 +1,40 @@
+---
+- name: Install Package
+  apt:
+    name:
+    - libssl-dev
+    - libreadline-dev
+    - gcc
+    - make
+    - libffi-dev
+    - zlib1g-dev
+    - unzip
+    - pkg-config
+    - autoconf
+    - automake
+    - build-essential
+    - nginx
+    - default-mysql-client
+    - default-libmysqlclient-dev
+
+    - wget
+    - percona-toolkit
+    - keychain
+
+    - graphviz
+    - redis-server
+    update_cache: true
+
+- name: Check SSH Key
+  stat:
+    path: "/home/isucon/.ssh/id_rsa"
+  register: sshkey_result
+
+- name: Create SSH Key
+  become: true
+  become_user: isucon
+  command: ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
+  when: not sshkey_result.stat.exists
+
+- name: chmod -R 777 /var/log
+  command: chmod -R 777 /var/log

@@ -1,0 +1,8 @@
+- hosts: allinone
+  become: yes
+  become_user: root
+  roles:
+    - role: common
+    - role: tools
+    - role: sysctl
+    - role: limits
