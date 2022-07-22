@@ -22,6 +22,7 @@
     - keychain
 
     - graphviz
+    - vim
     - redis-server
     update_cache: true
 
@@ -38,3 +39,16 @@
 
 - name: chmod -R 777 /var/log
   command: chmod -R 777 /var/log
+
+- name: Check git editor
+  become: true
+  become_user: isucon
+  ignore_errors: true
+  shell: git config --global core.editor | grep vim
+  register: git_editor_result
+
+- name: Change git editor to vim
+  become: true
+  become_user: isucon
+  command: git config --global core.editor vim
+  when: not git_editor_result.rc == 0
