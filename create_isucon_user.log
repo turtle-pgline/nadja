@@ -1,3 +1,5 @@
+sudo su -
+
 USERNAME=isucon
 GROUPNAME=isucon
 PASSWORD=isucon
@@ -8,3 +10,6 @@ groupadd -g $IGID $GROUPNAME && \
     useradd -m -s /bin/bash -u $IUID -g $IGID -G sudo $USERNAME && \
     echo $USERNAME:$PASSWORD | chpasswd && \
     echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+cp -R /home/ubuntu/.ssh /home/isucon/
+chown -R isucon:isucon /home/isucon/.ssh/
