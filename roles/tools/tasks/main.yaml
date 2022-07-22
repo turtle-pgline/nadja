@@ -12,6 +12,18 @@
     remote_src: yes
   when: not alp_result.stat.exists
 
+- name: Check mysqldef
+  stat:
+    path: "/usr/local/bin/mysqldef"
+  register: mysqldef_result
+
+- name: Unarchive mysqldef
+  unarchive:
+    src: https://github.com/k0kubun/sqldef/releases/download/v0.12.7/mysqldef_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+  when: not mysqldef_result.stat.exists
+
 - name: Check pprotein
   stat:
     path: "/usr/local/bin/pprotein"
