@@ -1,0 +1,22 @@
+---
+- name: Set authorized keys | naari3
+  become: true
+  become_user: isucon
+  authorized_key:
+    user: isucon
+    state: present
+    key: https://github.com/naari3.keys
+- name: Set authorized keys | ryota-sakamoto
+  become: true
+  become_user: isucon
+  authorized_key:
+    user: isucon
+    state: present
+    key: https://github.com/ryota-sakamoto.keys
+- name: Set authorized keys | zzuf
+  become: true
+  become_user: isucon
+  authorized_key:
+    user: isucon
+    state: present
+    key: https://github.com/zzuf.keys

@@ -3,6 +3,7 @@
   become_user: root
   roles:
     - role: common
+    - role: ssh_keys
     - role: tools
     - role: sysctl
     - role: limits

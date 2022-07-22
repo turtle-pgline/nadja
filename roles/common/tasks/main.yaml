@@ -14,8 +14,8 @@
     - automake
     - build-essential
     - nginx
-    - default-mysql-client
-    - default-libmysqlclient-dev
+    # - default-mysql-client
+    # - default-libmysqlclient-dev
 
     - wget
     - percona-toolkit

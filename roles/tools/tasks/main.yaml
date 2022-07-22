@@ -56,5 +56,5 @@
   notify:
     - reload systemctl
 
-# - name: pprotein | Start pprotein
-#   service: name=pprotein.service state=started enabled=yes
+- name: pprotein | Start pprotein-agent
+  service: name=pprotein-agent.service state=started enabled=yes

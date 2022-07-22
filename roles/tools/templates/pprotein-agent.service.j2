@@ -4,7 +4,7 @@ Requires=network.target
 After=syslog.target network.target
 
 [Service]
-Type=forking
+Type=simple
 ExecStart=/usr/local/bin/pprotein-agent
 PIDFile=/run/pprotein-agent.pid
 WorkingDirectory=/home/isucon/pprotein-agent
