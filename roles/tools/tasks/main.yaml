@@ -36,8 +36,16 @@
     remote_src: yes
   when: not pprotein_result.stat.exists
 
-# - name: pprotein | Create environment file
-#   template: src=pprotein.env.j2 dest=/etc/sysconfig/pprotein
+- name: Create sysconfig working dir
+  file:
+    path: "/etc/sysconfig"
+    state: directory
+    owner: "isucon"
+    group: "isucon"
+    mode: "775"
+
+- name: pprotein | Create environment file
+  template: src=pprotein.env.j2 dest=/etc/sysconfig/pprotein
 
 - name: Create pprotein working dir
   file:
@@ -51,9 +59,6 @@
   template: src=pprotein.service.j2 dest=/lib/systemd/system/pprotein.service mode=644
   notify:
     - reload systemctl
-
-# - name: pprotein-agent | Create environment file
-#   template: src=pprotein-agent.env.j2 dest=/etc/sysconfig/pprotein-agent
 
 - name: Create pprotein-agent working dir
   file:

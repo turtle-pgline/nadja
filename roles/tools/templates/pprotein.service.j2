@@ -5,6 +5,7 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
+EnvironmentFile=/etc/sysconfig/pprotein
 ExecStart=/usr/local/bin/pprotein
 PIDFile=/run/pprotein.pid
 WorkingDirectory=/home/isucon/pprotein
